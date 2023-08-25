@@ -131,4 +131,34 @@ add_action('wp_ajax_save_task', 'save_task_callback');
 // Agregar acción para usuarios no registrados
 add_action('wp_ajax_nopriv_save_task', 'save_task_callback');
 
+
+// Función para eliminar una tarea de la base de datos
+function delete_task_callback() {
+    if (isset($_POST['task'])) {
+        $task_text = sanitize_text_field($_POST['task']);
+        delete_task_from_database($task_text);
+        wp_die();
+    }
+}
+add_action('wp_ajax_delete_task', 'delete_task_callback');
+
+// Agregar acción para usuarios no registrados
+add_action('wp_ajax_nopriv_delete_task', 'delete_task_callback');
+
+// Función para eliminar una tarea de la base de datos
+function delete_task_from_database($task_text) {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'task_list_tasks';
+    $user_id = get_current_user_id();
+
+    $wpdb->delete(
+        $table_name,
+        array(
+            'task' => $task_text,
+            'user_id' => $user_id,
+        )
+    );
+}
+
+
 ?>

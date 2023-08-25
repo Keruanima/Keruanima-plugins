@@ -26,10 +26,33 @@ document.addEventListener('DOMContentLoaded', function () {
         const checkboxes = taskList.querySelectorAll('li input[type="checkbox"]');
         checkboxes.forEach(function (checkbox) {
             if (checkbox.checked) {
+                const taskText = checkbox.nextElementSibling.textContent;
                 checkbox.parentElement.remove();
+    
+                // Llama a la función AJAX para eliminar la tarea de la base de datos
+                deleteTaskFromDatabase(taskText);
             }
         });
     });
+    
+
+    function deleteTaskFromDatabase(taskText) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', myAjax.ajaxurl, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    // Tarea eliminada exitosamente
+                } else {
+                    // Error al eliminar la tarea
+                }
+            }
+        };
+    
+        const data = 'action=delete_task&task=' + encodeURIComponent(taskText);
+        xhr.send(data);
+    }
 
     function addTask() {
         const taskText = taskInput.value.trim();
