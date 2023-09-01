@@ -30,6 +30,10 @@ Supongamos que deseas agregar la lista de tareas en una entrada. Simplemente sig
 2. Agrega el shortcode `[task_list]` en el contenido de la entrada.
 3. Actualiza la entrada y observa cómo se muestra la lista de tareas.
 
+## Capturas
+![Alt text](image-2.png)
+![Alt text](image-1.png)
+
 ## Comentarios y Contribuciones
 
 ¡Gracias por probar mi plugin! Si tienes alguna pregunta, comentario o sugerencia, no dudes en crear un issue en este repositorio. ¡Tu opinión es valiosa para mí y me ayuda a mejorar el plugin!
